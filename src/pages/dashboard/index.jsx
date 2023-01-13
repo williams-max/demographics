@@ -135,9 +135,10 @@ const Dashboard = () => {
                   //  label="For desktop"
                   value={value}
                   minDate={dayjs('2017-01-01')}
-                  onChange={(newValue) => {
+                  /*onChange={(newValue) => {
                     setValue(newValue);
-                  }}
+                  }}*/
+                  onChange={handleChange}
                   renderInput={(params) => <TextField {...params} />}
                 />
 
@@ -332,7 +333,7 @@ const Dashboard = () => {
                 Sales Quantity
               </Typography>
               <Box height="250px" mt="-20px">
-                <BarChart isDashboard={true} />
+              <BarChart isDashboard={true} />
               </Box>
             </Box>
           </Grid>
@@ -350,7 +351,7 @@ const Dashboard = () => {
               </Box>
             </Box>
           </Grid>
-          <Grid xs={12}>
+          {/*<Grid xs={12}>
             <Box backgroundColor={colors.primary[400]} padding="30px">
               <Typography
                 variant="h5"
@@ -363,7 +364,7 @@ const Dashboard = () => {
                 <MyResponsiveBar isDashboard={true} />
               </Box>
             </Box>
-          </Grid>
+          </Grid>*/}
           <Grid xs={12} sm={12} md={6}>
             <Box backgroundColor={colors.primary[400]} padding="30px">
               <Typography

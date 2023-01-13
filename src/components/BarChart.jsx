@@ -45,12 +45,12 @@ const BarChart = ({isDashboard=false}) => {
                 }
             }}
             keys={[
-                'pp4',
-                'pp3',
-                'pp2',
-                'pp2',
-                'pp1',
-                'p1'
+                'January',
+                'February',
+                'April',
+                'May',
+                'July',
+                'June'
             ]}
             indexBy="country"
             margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
@@ -83,13 +83,13 @@ const BarChart = ({isDashboard=false}) => {
             fill={[
                 {
                     match: {
-                        id: 'pp1'
+                        id: 'fries'
                     },
                     id: 'dots'
                 },
                 {
                     match: {
-                        id: 'pp2'
+                        id: 'sandwich'
                     },
                     id: 'lines'
                 }
