@@ -32,6 +32,7 @@ import React, { useState, useEffect } from 'react'
 import MyResponsiveBar from "../../components/MyResponsiveBar";
 import MyResponsiveFunnel from "../../components/MyResponsiveFunnel";
 import MyResponsiveMarimekko from "../../components/MyResponsiveMarimekko";
+import LineChartDemo from "../../components/LineChartDemo";
 
 
 const Dashboard = () => {
@@ -40,15 +41,15 @@ const Dashboard = () => {
   const colors = tokens(theme.palette.mode);
   const [value, setValue] = useState(Date());
 
-  const[newRender,setNewRender]=useState(false); 
+  const [newRender, setNewRender] = useState(false);
 
   const handleChange = async (fecha) => {
 
     //setCurrentDate(fecha);
     console.log("fecha", fecha)
-    if(newRender==false){
+    if (newRender == false) {
       setNewRender(true);
-    }else{
+    } else {
       //newRenderValue ->True
       setNewRender(false)
     }
@@ -220,7 +221,7 @@ const Dashboard = () => {
           rowSpacing={1}
           columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         >
-          <Grid xs={12}>
+          {/* <Grid xs={12}>
             <Box backgroundColor={colors.primary[400]}>
               <Box
                 mt="25px"
@@ -255,6 +256,44 @@ const Dashboard = () => {
               </Box>
               <Box height="250px" m="-20px 0 0 0">
                 <LineChart isDashboard={true} newRender={newRender}/>
+              </Box>
+            </Box>
+          </Grid>*/}
+          <Grid xs={12}>
+            <Box backgroundColor={colors.primary[400]}>
+              <Box
+                mt="25px"
+                p="0 30px"
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Box>
+                  <Typography
+                    variant="h5"
+                    fontWeight="600"
+                    color={colors.grey[100]}
+                  >
+                    Products
+                  </Typography>
+                  <Typography
+                    variant="h5"
+                    fontWeight="600"
+                    color={colors.greenAccent[500]}
+                  >
+                    46
+                  </Typography>
+                </Box>
+                <Box>
+                  <IconButton>
+                    <DownloadOutlinedIcon
+                      sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
+                    />
+                  </IconButton>
+                </Box>
+              </Box>
+              <Box height="300px" m="-20px 0 0 0">
+                <LineChart isDashboard={true} newRender={newRender} />
               </Box>
             </Box>
           </Grid>
@@ -353,6 +392,40 @@ const Dashboard = () => {
               </Box>
             </Box>
           </Grid>
+
+          <Grid xs={12}>
+            <Box backgroundColor={colors.primary[400]}>
+              <Box
+                mt="25px"
+                p="0 30px"
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Box>
+                  <Typography
+                    variant="h5"
+                    fontWeight="600"
+                    color={colors.grey[100]}
+                  >
+                    Products
+                  </Typography>
+                  <Typography
+                    variant="h5"
+                    fontWeight="600"
+                    color={colors.greenAccent[500]}
+                  >
+                    Prece list
+                  </Typography>
+                </Box>
+             
+              </Box>
+              <Box height="300px" m="-20px 0 0 0">
+                <LineChartDemo isDashboard={true} newRender={newRender} />
+              </Box>
+            </Box>
+          </Grid>
+
 
         </Grid>
         {/*

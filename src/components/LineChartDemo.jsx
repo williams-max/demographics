@@ -2,13 +2,13 @@ import React from "react";
 import { ResponsiveLine } from "@nivo/line";
 import { useTheme } from "@mui/material";
 import { tokens } from "../theme";
-import { mockLineData } from "../data/mockData";
+import { mockLineData } from "../data/mockDataDemo";
 
 import dataProducts from "../data/products";
 import { useState, useEffect } from "react";
 import { set } from "date-fns";
 
-const LineChart = ({ isDashboard = false, newRender }) => {
+const LineChartDemo = ({ isDashboard = false, newRender }) => {
   //console.log("valor en lineChar ",newRender)
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -153,8 +153,8 @@ const LineChart = ({ isDashboard = false, newRender }) => {
 
       setDataTest1(object_data)
       */
-      getCoordinates();
-      //updateDate()
+      //getCoordinates();
+      updateDate()
     }
 
   }, [newRender]);
@@ -180,19 +180,24 @@ const LineChart = ({ isDashboard = false, newRender }) => {
       data: arrP
     }
     ]
+    /*
+        arrP.sort(function (a, b) {
+          return (a.y - b.y)
+        })*/
+    console.log("ordenado por", arrP)
 
-    //console.log("data Excel ", dataExcel)
-    //console.log(" object new ", object_data)
+    console.log("data Excel ", dataExcel)
+    console.log(" object new ", object_data)
     setDataTest1(object_data)
   }
   const updateDate = () => {
     const objFin = [];
 
-    //for (var i = 0; i < dataProducts.length; i++) {
-    for (var i = 0; i < 2; i++) {
+    for (var i = 0; i < dataProducts.length; i++) {
+    //for (var i = 0; i < 15; i++) {
 
       const arrP = [];
-      for (var j = 0; j < dataProducts[i].price_list.length - 1; j++) {
+      for (var j = 0; j < dataProducts[i].price_list.length ; j++) {
 
         var par = {
 
@@ -203,16 +208,29 @@ const LineChart = ({ isDashboard = false, newRender }) => {
         arrP.push(par)
       }
 
+      const colores=["green","red","black","#00C5C8","#C86700","orange"]
+    
+      var numberRamdon=getRandomArbitrary(0,colores.length-1);
+      //console.log("numberRamdon ",numberRamdon)
+     var put_color=colores[numberRamdon];
+      
       const object_data = {
         id: `price_list ${i}`,
-        color: 'red',
+        color: put_color,
         data: arrP
       }
+
       objFin.push(object_data)
- 
+      console.log("obj fin ", objFin)
+      console.log("mockline", mockLineData)
+      //   console.log("obj Fin ", objFin)
 
       setDataTest1(objFin)
     }
+  }
+
+  function getRandomArbitrary(min, max) {
+    return Math.round(Math.random() * (max - min) + min);
   }
   return (
     <>
@@ -256,9 +274,9 @@ const LineChart = ({ isDashboard = false, newRender }) => {
           },
         }}
         curve="catmullRom"
-      //  data={dataExcel}
+        //  data={dataExcel}
         data={dataTest1}
-        // data={mockLineData}
+  //  data={mockLineData}
         colors={isDashboard ? { datum: "color" } : { scheme: "nivo" }}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
         xScale={{ type: "point" }}
@@ -266,7 +284,7 @@ const LineChart = ({ isDashboard = false, newRender }) => {
           type: "linear",
           min: "auto",
           max: "auto",
-          stacked: false,//No activar solpamiento
+          stacked: false,
           reverse: false,
         }}
         yFormat=" >-.2f"
@@ -330,4 +348,4 @@ const LineChart = ({ isDashboard = false, newRender }) => {
   );
 };
 
-export default LineChart;
+export default LineChartDemo;
