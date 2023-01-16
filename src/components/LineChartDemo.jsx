@@ -7,6 +7,8 @@ import { mockLineData } from "../data/mockDataDemo";
 import dataProducts from "../data/products";
 import { useState, useEffect } from "react";
 import { set } from "date-fns";
+import axios from "axios";
+import { proResponseProductsUrl } from "./values/Strings/Url";
 
 const LineChartDemo = ({ isDashboard = false, newRender }) => {
   //console.log("valor en lineChar ",newRender)
@@ -72,60 +74,8 @@ const LineChartDemo = ({ isDashboard = false, newRender }) => {
 
   ]
   useEffect(() => {
-    console.log("productos", dataProducts)
-
-    /*
-        const objFin = [];
-        for (var i = 0; i < dataProducts.length; i++) {
     
-          const arrP = [];
-          for (var j = 0; j < dataProducts[i].price_list.length; j++) {
-    
-            var par = {
-              x: Number(dataProducts[i]?.price_list[j].cod),
-              y: dataProducts[i]?.price_list[j].pre,
-            }
-    
-            arrP.push(par)
-            //   console.log("d... ", dataProducts[i]?.price_list[j].pre)
-    
-          }
-    
-          const object_data = [{
-            id: `price_list ${i}`,
-            color: 'red',
-            data: arrP
-          }]
-          objFin.push(object_data)
-          console.log("obj Fin ", objFin)
-    
-          setDataTest1(objFin)
-        }*/
-
-
-    /*Fin */
-    /*
-    const arr = [];
-    for (var i = 0; i < dataProducts[0].price_list.length; i++) {
-
-      var par = {
-        x: Number(dataProducts[0]?.price_list[i].cod),
-        y: dataProducts[0]?.price_list[i].pre,
-      }
-      arr.push(par)
-    }
-
-    const object_data = [{
-      id: "price_list",
-      color: 'red',
-      data: arr
-    }]
-
-
-    setDataTest1(object_data)
-
-   */
-
+    updateDate()
   }, []);
 
   useEffect(() => {
@@ -133,28 +83,9 @@ const LineChartDemo = ({ isDashboard = false, newRender }) => {
       setDataTest1(mockLineData)
     }
     if (newRender == false) {
-      /*
-      const arr = [];
-      for (var i = 0; i < dataProducts[0].price_list.length; i++) {
-
-        var par = {
-          x: Number(dataProducts[0]?.price_list[i].cod),
-          y: dataProducts[0]?.price_list[i].pre,
-        }
-        arr.push(par)
-      }
-
-      const object_data = [{
-        id: "price_list",
-        color: 'red',
-        data: arr
-      }]
-
-
-      setDataTest1(object_data)
-      */
-      //getCoordinates();
-      updateDate()
+      
+      //updateDate()
+      getProductsDemo();
     }
 
   }, [newRender]);
@@ -194,10 +125,11 @@ const LineChartDemo = ({ isDashboard = false, newRender }) => {
     const objFin = [];
 
     for (var i = 0; i < dataProducts.length; i++) {
-    //for (var i = 0; i < 15; i++) {
+
 
       const arrP = [];
-      for (var j = 0; j < dataProducts[i].price_list.length ; j++) {
+      //the last element is of type string , that's why we put -1
+      for (var j = 0; j < dataProducts[i].price_list.length - 1; j++) {
 
         var par = {
 
@@ -208,12 +140,12 @@ const LineChartDemo = ({ isDashboard = false, newRender }) => {
         arrP.push(par)
       }
 
-      const colores=["green","red","black","#00C5C8","#C86700","orange"]
-    
-      var numberRamdon=getRandomArbitrary(0,colores.length-1);
+      const colores = ["green", "red", "black", "#00C5C8", "#C86700", "orange"]
+
+      var numberRamdon = getRandomArbitrary(0, colores.length - 1);
       //console.log("numberRamdon ",numberRamdon)
-     var put_color=colores[numberRamdon];
-      
+      var put_color = colores[numberRamdon];
+
       const object_data = {
         id: `price_list ${i}`,
         color: put_color,
@@ -221,12 +153,66 @@ const LineChartDemo = ({ isDashboard = false, newRender }) => {
       }
 
       objFin.push(object_data)
-      console.log("obj fin ", objFin)
-      console.log("mockline", mockLineData)
-      //   console.log("obj Fin ", objFin)
-
+  
       setDataTest1(objFin)
     }
+  }
+
+
+  const getProductsDemo = async () => {
+
+    //http://localhost:4000/api/get-product
+    
+    try {
+      const result = await axios.get(proResponseProductsUrl)
+      console.log("Product de express demo", result.data.products)
+
+      var arrayProducts = result.data.products;
+      console.log("array Productos demo", arrayProducts)
+
+
+      const objFin = [];
+
+      for (var i = 0; i < arrayProducts.length; i++) {
+
+
+        const arrP = [];
+        //the last element is of type string , that's why we put -1
+        for (var j = 0; j < arrayProducts[i].price_list.length - 1; j++) {
+
+          var par = {
+
+            y: arrayProducts[i]?.price_list[j].pre,
+            x: Number(arrayProducts[i]?.price_list[j].cod)
+          }
+
+          arrP.push(par)
+        }
+
+        const colores = ["green", "red", "black", "#00C5C8", "#C86700", "orange"]
+
+        var numberRamdon = getRandomArbitrary(0, colores.length - 1);
+        //console.log("numberRamdon ",numberRamdon)
+        var put_color = colores[numberRamdon];
+
+        const object_data = {
+          id: `price_list ${i}`,
+          color: put_color,
+          data: arrP
+        }
+
+        objFin.push(object_data)
+
+
+        setDataTest1(objFin)
+      }
+
+    } catch (error) {
+
+      console.log(error)
+    }
+    /**************** */
+
   }
 
   function getRandomArbitrary(min, max) {
@@ -276,7 +262,7 @@ const LineChartDemo = ({ isDashboard = false, newRender }) => {
         curve="catmullRom"
         //  data={dataExcel}
         data={dataTest1}
-  //  data={mockLineData}
+        //  data={mockLineData}
         colors={isDashboard ? { datum: "color" } : { scheme: "nivo" }}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
         xScale={{ type: "point" }}

@@ -282,7 +282,7 @@ const Dashboard = () => {
                     fontWeight="600"
                     color={colors.greenAccent[500]}
                   >
-                    46
+                     net_size_x, net_size_y
                   </Typography>
                 </Box>
                 <Box>
@@ -416,7 +416,7 @@ const Dashboard = () => {
                     fontWeight="600"
                     color={colors.greenAccent[500]}
                   >
-                    Prece list
+                    Price list
                   </Typography>
                 </Box>
              

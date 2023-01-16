@@ -7,6 +7,8 @@ import { mockLineData } from "../data/mockData";
 import dataProducts from "../data/products";
 import { useState, useEffect } from "react";
 import { set } from "date-fns";
+import axios from "axios";
+import { proResponseProductsUrl } from "./values/Strings/Url";
 
 const LineChart = ({ isDashboard = false, newRender }) => {
   //console.log("valor en lineChar ",newRender)
@@ -71,90 +73,24 @@ const LineChart = ({ isDashboard = false, newRender }) => {
     },
 
   ]
+
   useEffect(() => {
-    console.log("productos", dataProducts)
 
-    /*
-        const objFin = [];
-        for (var i = 0; i < dataProducts.length; i++) {
-    
-          const arrP = [];
-          for (var j = 0; j < dataProducts[i].price_list.length; j++) {
-    
-            var par = {
-              x: Number(dataProducts[i]?.price_list[j].cod),
-              y: dataProducts[i]?.price_list[j].pre,
-            }
-    
-            arrP.push(par)
-            //   console.log("d... ", dataProducts[i]?.price_list[j].pre)
-    
-          }
-    
-          const object_data = [{
-            id: `price_list ${i}`,
-            color: 'red',
-            data: arrP
-          }]
-          objFin.push(object_data)
-          console.log("obj Fin ", objFin)
-    
-          setDataTest1(objFin)
-        }*/
-
-
-    /*Fin */
-    /*
-    const arr = [];
-    for (var i = 0; i < dataProducts[0].price_list.length; i++) {
-
-      var par = {
-        x: Number(dataProducts[0]?.price_list[i].cod),
-        y: dataProducts[0]?.price_list[i].pre,
-      }
-      arr.push(par)
-    }
-
-    const object_data = [{
-      id: "price_list",
-      color: 'red',
-      data: arr
-    }]
-
-
-    setDataTest1(object_data)
-
-   */
-
-  }, []);
+    // getProducts();
+     getCoordinates();
+ 
+ }, []);
 
   useEffect(() => {
     if (newRender == true) {
       setDataTest1(mockLineData)
     }
     if (newRender == false) {
-      /*
-      const arr = [];
-      for (var i = 0; i < dataProducts[0].price_list.length; i++) {
-
-        var par = {
-          x: Number(dataProducts[0]?.price_list[i].cod),
-          y: dataProducts[0]?.price_list[i].pre,
-        }
-        arr.push(par)
-      }
-
-      const object_data = [{
-        id: "price_list",
-        color: 'red',
-        data: arr
-      }]
-
-
-      setDataTest1(object_data)
-      */
-      getCoordinates();
+   
+      //getCoordinates();
+      getProducts();
       //updateDate()
+
     }
 
   }, [newRender]);
@@ -181,8 +117,8 @@ const LineChart = ({ isDashboard = false, newRender }) => {
     }
     ]
 
-    //console.log("data Excel ", dataExcel)
-    //console.log(" object new ", object_data)
+    console.log("object data ",object_data)
+   
     setDataTest1(object_data)
   }
   const updateDate = () => {
@@ -209,17 +145,57 @@ const LineChart = ({ isDashboard = false, newRender }) => {
         data: arrP
       }
       objFin.push(object_data)
- 
+
 
       setDataTest1(objFin)
     }
   }
+
+
+  const getProducts = async () => {
+    try {
+      //local `http://localhost:4000/api/get-product
+      const result = await axios.get(proResponseProductsUrl)
+ 
+      var arrayProducts=result.data.products;
+      //console.log("array Productos ",arrayProducts)
+
+      const arrP = [];
+      for (var i = 0; i < arrayProducts.length; i++) {
+        var par = {
+          x: arrayProducts[i].net_size_x,
+          y: arrayProducts[i].net_size_y
+        }
+
+
+        arrP.push(par)
+      }
+      //Sorting Pairs
+      arrP.sort(function (a, b) {
+        return (a.x - b.x)
+      })
+  
+      const object_data = [{
+        id: `data`,
+        color: '#259000',
+        data: arrP
+      }
+      ]
+
+      console.log("object data api express",object_data)
+      setDataTest1(object_data)
+
+    } catch (error) {
+
+      console.log(error)
+    }
+
+  }
+
+
   return (
     <>
-      {/* <h1>pagina </h1>
-      <button>Prev</button>
-      <button>Next</button>
-      <h2>items</h2>*/}
+   
       <ResponsiveLine
         theme={{
           axis: {
@@ -256,7 +232,7 @@ const LineChart = ({ isDashboard = false, newRender }) => {
           },
         }}
         curve="catmullRom"
-      //  data={dataExcel}
+        //  data={dataExcel}
         data={dataTest1}
         // data={mockLineData}
         colors={isDashboard ? { datum: "color" } : { scheme: "nivo" }}
