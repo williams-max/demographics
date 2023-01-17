@@ -282,7 +282,7 @@ const Dashboard = () => {
                     fontWeight="600"
                     color={colors.greenAccent[500]}
                   >
-                     net_size_x, net_size_y
+                    net_size_x, net_size_y
                   </Typography>
                 </Box>
                 <Box>
@@ -298,6 +298,40 @@ const Dashboard = () => {
               </Box>
             </Box>
           </Grid>
+
+          <Grid xs={12}>
+            <Box backgroundColor={colors.primary[400]}>
+              <Box
+                mt="25px"
+                p="0 30px"
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Box>
+                  <Typography
+                    variant="h5"
+                    fontWeight="600"
+                    color={colors.grey[100]}
+                  >
+                    Products
+                  </Typography>
+                  <Typography
+                    variant="h5"
+                    fontWeight="600"
+                    color={colors.greenAccent[500]}
+                  >
+                    Price list
+                  </Typography>
+                </Box>
+
+              </Box>
+              <Box height="300px" m="-20px 0 0 0">
+                <LineChartDemo isDashboard={true} newRender={newRender} />
+              </Box>
+            </Box>
+          </Grid>
+
           <Grid xs={12} sm={12} md={6}>
             <Box backgroundColor={colors.primary[400]} p="30px">
               <Typography variant="h5" fontWeight="600">
@@ -333,7 +367,7 @@ const Dashboard = () => {
                 Sales Quantity
               </Typography>
               <Box height="250px" mt="-20px">
-              <BarChart isDashboard={true} />
+                <BarChart isDashboard={true} />
               </Box>
             </Box>
           </Grid>
@@ -394,38 +428,6 @@ const Dashboard = () => {
             </Box>
           </Grid>
 
-          <Grid xs={12}>
-            <Box backgroundColor={colors.primary[400]}>
-              <Box
-                mt="25px"
-                p="0 30px"
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <Box>
-                  <Typography
-                    variant="h5"
-                    fontWeight="600"
-                    color={colors.grey[100]}
-                  >
-                    Products
-                  </Typography>
-                  <Typography
-                    variant="h5"
-                    fontWeight="600"
-                    color={colors.greenAccent[500]}
-                  >
-                    Price list
-                  </Typography>
-                </Box>
-             
-              </Box>
-              <Box height="300px" m="-20px 0 0 0">
-                <LineChartDemo isDashboard={true} newRender={newRender} />
-              </Box>
-            </Box>
-          </Grid>
 
 
         </Grid>
