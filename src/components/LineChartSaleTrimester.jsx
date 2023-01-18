@@ -2,15 +2,15 @@ import React from "react";
 import { ResponsiveLine } from "@nivo/line";
 import { useTheme } from "@mui/material";
 import { tokens } from "../theme";
-import { mockLineData } from "../data/mockData";
+import { mockLineData } from "../data/mockDataDemo";
 
 import dataProducts from "../data/products";
 import { useState, useEffect } from "react";
 import { set } from "date-fns";
 import axios from "axios";
-import { proResponseProductsUrl } from "./values/Strings/Url";
+import { proResponseProductsDocsTrimesterUrl, proResponseProductsUrl } from "./values/Strings/Url";
 
-const LineChart = ({ isDashboard = false, newRender }) => {
+const LineChartSaleTrimester = ({ isDashboard = false, newRender }) => {
   //console.log("valor en lineChar ",newRender)
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -73,24 +73,19 @@ const LineChart = ({ isDashboard = false, newRender }) => {
     },
 
   ]
-
   useEffect(() => {
-
-    // getProducts();
-     getCoordinates();
- 
- }, []);
+    
+   // updateDate()
+  }, []);
 
   useEffect(() => {
     if (newRender == true) {
       setDataTest1(mockLineData)
     }
     if (newRender == false) {
-   
-      //getCoordinates();
-      getProducts();
+      
       //updateDate()
-
+    getProductsDemo();
     }
 
   }, [newRender]);
@@ -116,18 +111,24 @@ const LineChart = ({ isDashboard = false, newRender }) => {
       data: arrP
     }
     ]
+    /*
+        arrP.sort(function (a, b) {
+          return (a.y - b.y)
+        })*/
+    console.log("ordenado por", arrP)
 
-    console.log("object data ",object_data)
-   
+    console.log("data Excel ", dataExcel)
+    console.log(" object new ", object_data)
     setDataTest1(object_data)
   }
   const updateDate = () => {
     const objFin = [];
 
-    //for (var i = 0; i < dataProducts.length; i++) {
-    for (var i = 0; i < 2; i++) {
+    for (var i = 0; i < dataProducts.length; i++) {
+
 
       const arrP = [];
+      //the last element is of type string , that's why we put -1
       for (var j = 0; j < dataProducts[i].price_list.length - 1; j++) {
 
         var par = {
@@ -139,63 +140,99 @@ const LineChart = ({ isDashboard = false, newRender }) => {
         arrP.push(par)
       }
 
+      const colores = ["green", "red", "black", "#00C5C8", "#C86700", "orange"]
+
+      var numberRamdon = getRandomArbitrary(0, colores.length - 1);
+      //console.log("numberRamdon ",numberRamdon)
+      var put_color = colores[numberRamdon];
+
       const object_data = {
         id: `price_list ${i}`,
-        color: 'red',
+        color: put_color,
         data: arrP
       }
+
       objFin.push(object_data)
-
-
+  
       setDataTest1(objFin)
     }
   }
 
 
-  const getProducts = async () => {
-    try {
-      //local `http://localhost:4000/api/get-product
-      const result = await axios.get(`http://localhost:4000/api/get-product`)
- 
-      var arrayProducts=result.data.products;
-      //console.log("array Productos ",arrayProducts)
+  const getProductsDemo = async () => {
 
-      const arrP = [];
+    
+    //`http://localhost:4000/api/get-docs-trimester`
+    
+    try {
+
+      const resultado = await axios.get(proResponseProductsDocsTrimesterUrl)
+      console.log("resultado formateado",resultado.data)
+
+      setDataTest1(resultado.data)
+      /*
+      const result = await axios.get(`http://localhost:4000/api/get-product`)
+      console.log("Product de express demo", result.data.products)
+
+      var arrayProducts = result.data.products;
+      console.log("array Productos demo", arrayProducts)
+
+
+      const objFin = [];
+
       for (var i = 0; i < arrayProducts.length; i++) {
-        var par = {
-          x: arrayProducts[i].net_size_x,
-          y: arrayProducts[i].net_size_y
+
+
+        const arrP = [];
+        //the last element is of type string , that's why we put -1
+        for (var j = 0; j < arrayProducts[i].price_list.length - 1; j++) {
+
+          var par = {
+
+            y: arrayProducts[i]?.price_list[j].pre,
+            x: Number(arrayProducts[i]?.price_list[j].cod)
+          }
+
+          arrP.push(par)
         }
 
+        const colores = ["green", "red", "black", "#00C5C8", "#C86700", "orange"]
 
-        arrP.push(par)
-      }
-      //Sorting Pairs
-      arrP.sort(function (a, b) {
-        return (a.x - b.x)
-      })
-  
-      const object_data = [{
-        id: `data`,
-        color: '#259000',
-        data: arrP
-      }
-      ]
+        var numberRamdon = getRandomArbitrary(0, colores.length - 1);
+        //console.log("numberRamdon ",numberRamdon)
+        var put_color = colores[numberRamdon];
 
-      console.log("object data api express",object_data)
-      setDataTest1(object_data)
+        const object_data = {
+          id: `price_list ${i}`,
+          color: put_color,
+          data: arrP
+        }
+        console.log(object_data)
+
+        objFin.push(object_data)
+
+
+        setDataTest1(objFin)
+
+      }*/
 
     } catch (error) {
 
       console.log(error)
     }
+    /**************** */
 
   }
 
-
+  function getRandomArbitrary(min, max) {
+    return Math.round(Math.random() * (max - min) + min);
+  }
   return (
     <>
-   
+      {/* <h1>pagina </h1>
+      <button>Prev</button>
+      <button>Next</button>
+      <h2>items</h2>*/}
       <ResponsiveLine
         theme={{
           axis: {
@@ -234,7 +271,7 @@ const LineChart = ({ isDashboard = false, newRender }) => {
         curve="catmullRom"
         //  data={dataExcel}
         data={dataTest1}
-        // data={mockLineData}
+        //  data={mockLineData}
         colors={isDashboard ? { datum: "color" } : { scheme: "nivo" }}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
         xScale={{ type: "point" }}
@@ -242,7 +279,7 @@ const LineChart = ({ isDashboard = false, newRender }) => {
           type: "linear",
           min: "auto",
           max: "auto",
-          stacked: false,//No activar solpamiento
+          stacked: false,
           reverse: false,
         }}
         yFormat=" >-.2f"
@@ -253,7 +290,7 @@ const LineChart = ({ isDashboard = false, newRender }) => {
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
-          legend: isDashboard ? undefined : "transportation",
+          legend: "Quarters",
           legendOffset: 36,
           legendPosition: "middle",
         }}
@@ -263,7 +300,7 @@ const LineChart = ({ isDashboard = false, newRender }) => {
           tickValues: 5,
           tickPadding: 5,
           tickRotation: 0,
-          legend: isDashboard ? undefined : "count",
+          legend:"Sales ",
           legendOffset: -40,
           legendPosition: "middle",
         }}
@@ -306,4 +343,4 @@ const LineChart = ({ isDashboard = false, newRender }) => {
   );
 };
 
-export default LineChart;
+export default LineChartSaleTrimester;

@@ -33,6 +33,8 @@ import MyResponsiveBar from "../../components/MyResponsiveBar";
 import MyResponsiveFunnel from "../../components/MyResponsiveFunnel";
 import MyResponsiveMarimekko from "../../components/MyResponsiveMarimekko";
 import LineChartDemo from "../../components/LineChartDemo";
+import LineChartSale from "../../components/LineChartSale";
+import LineChartSaleTrimester from "../../components/LineChartSaleTrimester";
 
 
 const Dashboard = () => {
@@ -298,6 +300,85 @@ const Dashboard = () => {
               </Box>
             </Box>
           </Grid>
+
+          <Grid xs={12}>
+            <Box backgroundColor={colors.primary[400]}>
+              <Box
+                mt="25px"
+                p="0 30px"
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Box>
+                  <Typography
+                    variant="h5"
+                    fontWeight="600"
+                    color={colors.grey[100]}
+                  >
+                    Products
+                  </Typography>
+                  <Typography
+                    variant="h5"
+                    fontWeight="600"
+                    color={colors.greenAccent[500]}
+                  >
+                    Sales / Month 2022
+                  </Typography>
+                </Box>
+                <Box>
+                  {/* <IconButton>
+                    <DownloadOutlinedIcon
+                      sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
+                    />
+                  </IconButton>*/}
+                </Box>
+              </Box>
+              <Box height="300px" m="-20px 0 0 0">
+                <LineChartSale isDashboard={true} newRender={newRender} />
+              </Box>
+            </Box>
+          </Grid>
+
+          <Grid xs={12}>
+            <Box backgroundColor={colors.primary[400]}>
+              <Box
+                mt="25px"
+                p="0 30px"
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Box>
+                  <Typography
+                    variant="h5"
+                    fontWeight="600"
+                    color={colors.grey[100]}
+                  >
+                    Products
+                  </Typography>
+                  <Typography
+                    variant="h5"
+                    fontWeight="600"
+                    color={colors.greenAccent[500]}
+                  >
+                    Sales / Quarters 2022
+                  </Typography>
+                </Box>
+                <Box>
+                  {/* <IconButton>
+                    <DownloadOutlinedIcon
+                      sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
+                    />
+                  </IconButton>*/}
+                </Box>
+              </Box>
+              <Box height="300px" m="-20px 0 0 0">
+                <LineChartSaleTrimester isDashboard={true} newRender={newRender} />
+              </Box>
+            </Box>
+          </Grid>
+
 
           <Grid xs={12}>
             <Box backgroundColor={colors.primary[400]}>
