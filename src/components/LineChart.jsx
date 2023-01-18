@@ -155,7 +155,7 @@ const LineChart = ({ isDashboard = false, newRender }) => {
   const getProducts = async () => {
     try {
       //local `http://localhost:4000/api/get-product
-      const result = await axios.get(`http://localhost:4000/api/get-product`)
+      const result = await axios.get(proResponseProductsUrl)
  
       var arrayProducts=result.data.products;
       //console.log("array Productos ",arrayProducts)
