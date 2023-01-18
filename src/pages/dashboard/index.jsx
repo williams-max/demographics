@@ -327,11 +327,7 @@ const Dashboard = () => {
                   </Typography>
                 </Box>
                 <Box>
-                  {/* <IconButton>
-                    <DownloadOutlinedIcon
-                      sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
-                    />
-                  </IconButton>*/}
+             
                 </Box>
               </Box>
               <Box height="300px" m="-20px 0 0 0">
@@ -340,6 +336,7 @@ const Dashboard = () => {
             </Box>
           </Grid>
 
+          
           <Grid xs={12}>
             <Box backgroundColor={colors.primary[400]}>
               <Box
@@ -366,11 +363,7 @@ const Dashboard = () => {
                   </Typography>
                 </Box>
                 <Box>
-                  {/* <IconButton>
-                    <DownloadOutlinedIcon
-                      sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
-                    />
-                  </IconButton>*/}
+             
                 </Box>
               </Box>
               <Box height="300px" m="-20px 0 0 0">

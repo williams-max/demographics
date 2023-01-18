@@ -161,10 +161,10 @@ const LineChartDemo = ({ isDashboard = false, newRender }) => {
 
   const getProductsDemo = async () => {
 
-    //http://localhost:4000/api/get-product
-    
+    //
+    //proResponseProductsUrl
     try {
-      const result = await axios.get(proResponseProductsUrl)
+      const result = await axios.get(`http://localhost:4000/api/get-product`)
       console.log("Product de express demo", result.data.products)
 
       var arrayProducts = result.data.products;
@@ -173,7 +173,7 @@ const LineChartDemo = ({ isDashboard = false, newRender }) => {
 
       const objFin = [];
 
-      for (var i = 0; i < arrayProducts.length; i++) {
+      for (var i = 0; i < arrayProducts?.length; i++) {
 
 
         const arrP = [];
@@ -220,10 +220,7 @@ const LineChartDemo = ({ isDashboard = false, newRender }) => {
   }
   return (
     <>
-      {/* <h1>pagina </h1>
-      <button>Prev</button>
-      <button>Next</button>
-      <h2>items</h2>*/}
+      {dataTest1?.length > 0 ?
       <ResponsiveLine
         theme={{
           axis: {
@@ -330,6 +327,7 @@ const LineChartDemo = ({ isDashboard = false, newRender }) => {
           },
         ]}
       />
+      : <></>}
     </>
   );
 };

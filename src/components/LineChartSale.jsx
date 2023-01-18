@@ -75,7 +75,7 @@ const LineChartSale = ({ isDashboard = false, newRender }) => {
   ]
   useEffect(() => {
     
-   // updateDate()
+   updateDate()
   }, []);
 
   useEffect(() => {
@@ -162,10 +162,10 @@ const LineChartSale = ({ isDashboard = false, newRender }) => {
   const getProductsDemo = async () => {
 
    
-    //`http://localhost:4000/api/get-docs`
+    //
     try {
-
-      const resultado = await axios.get(proResponseProductsDocsUrl)
+//proResponseProductsDocsUrl
+      const resultado = await axios.get(`http://localhost:4000/api/get-docs`)
       console.log("resultado formateado",resultado.data)
 
       setDataTest1(resultado.data)
@@ -228,10 +228,7 @@ const LineChartSale = ({ isDashboard = false, newRender }) => {
   }
   return (
     <>
-      {/* <h1>pagina </h1>
-      <button>Prev</button>
-      <button>Next</button>
-      <h2>items</h2>*/}
+        {dataTest1?.length > 0 ?
       <ResponsiveLine
         theme={{
           axis: {
@@ -338,6 +335,7 @@ const LineChartSale = ({ isDashboard = false, newRender }) => {
           },
         ]}
       />
+      : <></>}
     </>
   );
 };
