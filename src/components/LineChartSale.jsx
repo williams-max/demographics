@@ -75,7 +75,7 @@ const LineChartSale = ({ isDashboard = false, newRender }) => {
   ]
   useEffect(() => {
     
-   updateDate()
+   //updateDate()
   }, []);
 
   useEffect(() => {
@@ -161,11 +161,11 @@ const LineChartSale = ({ isDashboard = false, newRender }) => {
 
   const getProductsDemo = async () => {
 
-   
-    //
+   //proResponseProductsDocsUrl,{timeout: 10000}
+    //`http://localhost:4000/api/get-docs-month`
     try {
 //proResponseProductsDocsUrl
-      const resultado = await axios.get(`http://localhost:4000/api/get-docs`)
+      const resultado = await axios.get(`http://localhost:4000/api/get-docs-month`)
       console.log("resultado formateado",resultado.data)
 
       setDataTest1(resultado.data)
@@ -336,7 +336,7 @@ const LineChartSale = ({ isDashboard = false, newRender }) => {
           },
         ]}
       />
-      : <></>}
+      : <><h4> Loading...</h4></>}
     </>
   );
 };

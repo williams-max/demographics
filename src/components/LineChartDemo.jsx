@@ -75,7 +75,7 @@ const LineChartDemo = ({ isDashboard = false, newRender }) => {
   ]
   useEffect(() => {
     
-    updateDate()
+   // updateDate()
   }, []);
 
   useEffect(() => {
@@ -328,7 +328,7 @@ const LineChartDemo = ({ isDashboard = false, newRender }) => {
           },
         ]}
       />
-      : <></>}
+      : <><h4> Loading...</h4></>}
     </>
   );
 };

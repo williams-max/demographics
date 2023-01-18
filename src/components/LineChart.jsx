@@ -77,7 +77,7 @@ const LineChart = ({ isDashboard = false, newRender }) => {
   useEffect(() => {
 
     // getProducts();
-    getCoordinates();
+    //getCoordinates();
 
   }, []);
 
@@ -305,7 +305,7 @@ const LineChart = ({ isDashboard = false, newRender }) => {
             },
           ]}
         />
-        : <>Loading...</>}
+        : <><h4> Loading...</h4></>}
     </>
   );
 };

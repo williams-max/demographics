@@ -75,7 +75,7 @@ const LineChartSaleTrimester = ({ isDashboard = false, newRender }) => {
   ]
   useEffect(() => {
 
-    updateDate()
+   // updateDate()
   }, []);
 
   useEffect(() => {
@@ -337,7 +337,7 @@ const LineChartSaleTrimester = ({ isDashboard = false, newRender }) => {
             },
           ]}
         />
-        : <></>}
+        : <><h4> Loading...</h4></>}
     </>
   );
 };
