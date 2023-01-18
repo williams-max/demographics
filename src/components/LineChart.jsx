@@ -305,7 +305,7 @@ const LineChart = ({ isDashboard = false, newRender }) => {
             },
           ]}
         />
-        : <></>}
+        : <>Loading...</>}
     </>
   );
 };
