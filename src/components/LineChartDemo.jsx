@@ -210,8 +210,9 @@ const LineChartDemo = ({ isDashboard = false, newRender }) => {
     } catch (error) {
 
       console.log(error)
+      //setDataTest1([])
     }
-    /**************** */
+  
 
   }
 
@@ -220,7 +221,7 @@ const LineChartDemo = ({ isDashboard = false, newRender }) => {
   }
   return (
     <>
-      {dataTest1?.length > 0 ?
+   {dataTest1[0]?.data?.length > 0 ?
       <ResponsiveLine
         theme={{
           axis: {

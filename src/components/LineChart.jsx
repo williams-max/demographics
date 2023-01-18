@@ -117,7 +117,7 @@ const LineChart = ({ isDashboard = false, newRender }) => {
     }
     ]
 
-    console.log("object data ", object_data)
+    //console.log("object data ", object_data)
 
     setDataTest1(object_data)
   }
@@ -182,21 +182,23 @@ const LineChart = ({ isDashboard = false, newRender }) => {
       }
       ]
 
-      console.log("object data api express", object_data)
+      // console.log("object data api express", object_data)
       setDataTest1(object_data)
 
     } catch (error) {
 
       console.log(error)
+      //  setDataTest1([])
     }
 
   }
 
+  console.log("line char ", dataTest1[0]?.data?.length)
 
   return (
     <>
 
-      {dataTest1?.length > 0 ?
+      {dataTest1[0]?.data?.length > 0 ?
         <ResponsiveLine
           theme={{
             axis: {
