@@ -262,44 +262,7 @@ const Dashboard = () => {
               </Box>
             </Box>
           </Grid>*/}
-          <Grid xs={12}>
-            <Box backgroundColor={colors.primary[400]}>
-              <Box
-                mt="25px"
-                p="0 30px"
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <Box>
-                  <Typography
-                    variant="h5"
-                    fontWeight="600"
-                    color={colors.grey[100]}
-                  >
-                    Products
-                  </Typography>
-                  <Typography
-                    variant="h5"
-                    fontWeight="600"
-                    color={colors.greenAccent[500]}
-                  >
-                    net_size_x, net_size_y
-                  </Typography>
-                </Box>
-                <Box>
-                  <IconButton>
-                    <DownloadOutlinedIcon
-                      sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
-                    />
-                  </IconButton>
-                </Box>
-              </Box>
-              <Box height="300px" m="-20px 0 0 0">
-                <LineChart isDashboard={true} newRender={newRender} />
-              </Box>
-            </Box>
-          </Grid>
+
 
           <Grid xs={12}>
             <Box backgroundColor={colors.primary[400]}>
@@ -327,7 +290,7 @@ const Dashboard = () => {
                   </Typography>
                 </Box>
                 <Box>
-             
+
                 </Box>
               </Box>
               <Box height="300px" m="-20px 0 0 0">
@@ -336,7 +299,7 @@ const Dashboard = () => {
             </Box>
           </Grid>
 
-          
+
           <Grid xs={12}>
             <Box backgroundColor={colors.primary[400]}>
               <Box
@@ -363,7 +326,7 @@ const Dashboard = () => {
                   </Typography>
                 </Box>
                 <Box>
-             
+
                 </Box>
               </Box>
               <Box height="300px" m="-20px 0 0 0">
@@ -373,7 +336,7 @@ const Dashboard = () => {
           </Grid>
 
 
-          <Grid xs={12}>
+          {/*<Grid xs={12}>
             <Box backgroundColor={colors.primary[400]}>
               <Box
                 mt="25px"
@@ -404,7 +367,7 @@ const Dashboard = () => {
                 <LineChartDemo isDashboard={true} newRender={newRender} />
               </Box>
             </Box>
-          </Grid>
+          </Grid>*/}
 
           <Grid xs={12} sm={12} md={6}>
             <Box backgroundColor={colors.primary[400]} p="30px">
@@ -502,68 +465,48 @@ const Dashboard = () => {
             </Box>
           </Grid>
 
+          <Grid xs={12}>
+            <Box backgroundColor={colors.primary[400]}>
+              <Box
+                mt="25px"
+                p="0 30px"
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Box>
+                  <Typography
+                    variant="h5"
+                    fontWeight="600"
+                    color={colors.grey[100]}
+                  >
+                    Products
+                  </Typography>
+                  <Typography
+                    variant="h5"
+                    fontWeight="600"
+                    color={colors.greenAccent[500]}
+                  >
+                    net_size_x, net_size_y
+                  </Typography>
+                </Box>
+                <Box>
+                  <IconButton>
+                    <DownloadOutlinedIcon
+                      sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
+                    />
+                  </IconButton>
+                </Box>
+              </Box>
+              <Box height="300px" m="-20px 0 0 0">
+                <LineChart isDashboard={true} newRender={newRender} />
+              </Box>
+            </Box>
+          </Grid>
 
 
         </Grid>
-        {/*
-        <Grid xs={12} sm={12} md={4} lg={4} xl={4}>
-          <Box
-            backgroundColor={colors.primary[400]}
-            maxHeight="100vh"
-            overflow="auto"
-            m="25px 0 0 0"
-          >
-            <Box
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-              borderBottom={`4px solid ${colors.primary[500]}`}
-              color={colors.grey[100]}
-              p="15px"
-            >
-              <Typography
-                variant="h5"
-                fontWeight="600"
-                color={colors.grey[100]}
-              >
-                Resent Transaction
-              </Typography>
-            </Box>
-            mockTransactions.map((transaction, i) => {
-              return (
-                <Box
-                  key={`${transaction}-${i}`}
-                  display="flex"
-                  justifyContent="space-between"
-                  alignItems="center"
-                  borderBottom={`4px solid ${colors.primary[500]}`}
-                  p="15px"
-                >
-                  <Box>
-                    <Typography
-                      variant="h5"
-                      fontWeight="600"
-                      color={colors.greenAccent[100]}
-                    >
-                      {transaction.txId}
-                    </Typography>
-                    <Typography color={colors.grey[100]}>
-                      {transaction.user}
-                    </Typography>
-                  </Box>
-                  <Box color={colors.grey[100]}>{transaction.date}</Box>
-                  <Box
-                    color={colors.greenAccent[500]}
-                    p="5px 10px"
-                    borderRadius="4px"
-                  >
-                    ${transaction.cost}
-                  </Box>
-                </Box>
-              );
-            })
-          </Box>
-        </Grid>*/}
+
       </Grid>
     </Box>
   );
