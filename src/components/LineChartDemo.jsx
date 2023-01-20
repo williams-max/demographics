@@ -161,10 +161,10 @@ const LineChartDemo = ({ isDashboard = false, newRender }) => {
 
   const getProductsDemo = async () => {
 
-    //
+    //`http://localhost:4000/api/get-product`
     //proResponseProductsUrl
     try {
-      const result = await axios.get(`http://localhost:4000/api/get-product`)
+      const result = await axios.get(proResponseProductsUrl)
       console.log("Product de express demo", result.data.products)
 
       var arrayProducts = result.data.products;
